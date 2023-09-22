@@ -1,8 +1,7 @@
 # Makefile
 
-export SHARELATEX_BASE_TAG := sharelatex/sharelatex-base
-export SHARELATEX_TAG := sharelatex/sharelatex
-export SHARELATEX_BASE_CACHE := $(shell echo $(SHARELATEX_BASE_TAG) | sed -E 's/(.+):.+/\1:latest/')
+export SHARELATEX_BASE_TAG := sharelatex-base:v4.1.1
+export SHARELATEX_TAG := sharelatex:v4.1.1
 export MONOREPO_REVISION := $(shell git rev-parse HEAD)
 MONOREPO_ROOT := ../
 
@@ -11,7 +10,7 @@ all: build-base build-community
 build-base:
 	cp .dockerignore $(MONOREPO_ROOT)
 	docker pull $(SHARELATEX_BASE_CACHE) || echo "nothing cached yet"
-	docker build -f Dockerfile-base --pull --cache-from $(SHARELATEX_BASE_CACHE) -t $(SHARELATEX_BASE_TAG) $(MONOREPO_ROOT)
+	docker build -f Dockerfile-base -t $(SHARELATEX_BASE_TAG) $(MONOREPO_ROOT)
 
 
 build-community:
