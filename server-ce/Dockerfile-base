@@ -41,6 +41,7 @@ RUN apt-get update \
 ARG TEXLIVE_MIRROR=https://mirror.ctan.org/systems/texlive/tlnet
 
 RUN mkdir /install-tl-unx \
+&&  export LANG=C \
 &&  wget --quiet https://tug.org/texlive/files/texlive.asc \
 &&  gpg --import texlive.asc \
 &&  rm texlive.asc \
