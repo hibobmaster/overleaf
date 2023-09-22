@@ -41,7 +41,6 @@ RUN apt-get update \
 ARG TEXLIVE_MIRROR=https://mirror.ctan.org/systems/texlive/tlnet
 
 RUN mkdir /install-tl-unx \
-&&  export LANG=C \
 &&  wget --quiet https://tug.org/texlive/files/texlive.asc \
 &&  gpg --import texlive.asc \
 &&  rm texlive.asc \
@@ -62,13 +61,12 @@ RUN mkdir /install-tl-unx \
       -repository ${TEXLIVE_MIRROR} \
     \
 &&  $(find /usr/local/texlive -name tlmgr) path add \
-&&  tlmgr install --repository ${TEXLIVE_MIRROR} \
-    latexmk\
+&&  tlmgr install -repository ${TEXLIVE_MIRROR} \
+    latexmk \
     texcount \
     synctex \
     etoolbox \
-&&  tlmgr path add \
-&&  tlmgr install scheme-full \
+    \
 &&  tlmgr path add \
 &&  rm -rf /install-tl-unx
 
