@@ -9,7 +9,6 @@ all: build-base build-community
 
 build-base:
 	cp .dockerignore $(MONOREPO_ROOT)
-	docker pull $(SHARELATEX_BASE_CACHE) || echo "nothing cached yet"
 	docker build -f Dockerfile-base -t $(SHARELATEX_BASE_TAG) $(MONOREPO_ROOT)
 
 
